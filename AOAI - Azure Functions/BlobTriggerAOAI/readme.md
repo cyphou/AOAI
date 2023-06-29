@@ -1,11 +1,11 @@
 # BlobTrigger - Python
 
-The `BlobTrigger` makes it incredibly easy to react to new Blobs inside of Azure Blob Storage. This sample demonstrates a simple use case of processing data from a given Blob using Python.
+The `BlobTrigger` on a dedicated folder and validated that the file is a .DOCX file.
 
 ## How it works
 
-For a `BlobTrigger` to work, you provide a path which dictates where the blobs are located inside your container, and can also help restrict the types of blobs you wish to return. For instance, you can set the path to `samples/{name}.png` to restrict the trigger to only the samples path and only blobs with ".png" at the end of their name.
-
-## Learn more
-
-<TODO> Documentation
+1. Test file extension .DOCX
+2. Open .DOCX
+3. Create CHUNKS.JSON on tmp folder
+4. Create VECTORS.JSON on tmp folder
+5. Upload VECTORS.JSON on Search
