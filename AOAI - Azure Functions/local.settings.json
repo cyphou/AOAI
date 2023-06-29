@@ -1,22 +1,22 @@
 {
   "IsEncrypted": false,
   "Values": {
-    "AzureWebJobsStorage": "DefaultEndpointsProtocol=https;AccountName=pdesademo;AccountKey=60FpKo1f1389I+JBoCA+nwHdLT/NCU33DHhHeoy1RC48vs5/HIyNUyldpgFci+v5n9MvFxk+Up4H+AStHHHT4g==;EndpointSuffix=core.windows.net",
+    "AzureWebJobsStorage": "CONNECTION_STRING_TO_STORAGE_ACCOUNT",
     "FUNCTIONS_WORKER_RUNTIME": "python",
-    "SA_STORAGE": "DefaultEndpointsProtocol=https;AccountName=pdesademo;AccountKey=60FpKo1f1389I+JBoCA+nwHdLT/NCU33DHhHeoy1RC48vs5/HIyNUyldpgFci+v5n9MvFxk+Up4H+AStHHHT4g==;EndpointSuffix=core.windows.net",
-    "AZURE_STORAGE_URI": "https://pdesademo.blob.core.windows.net",
-    "AZURE_STORAGE_CONTAINER": "aml",
-    "AZURE_STORAGE_SAS": "?sv=2022-11-02&ss=bfqt&srt=sco&sp=rwdlacupyx&se=2023-10-30T22:03:14Z&st=2023-06-28T13:03:14Z&spr=https&sig=eXuAU%2F68sF57TIKWQ2PZCICs7IgeqfR0esT0iZQDlGA%3D",
+    "SA_STORAGE": "CONNECTION_STRING_TO_STORAGE_ACCOUNT",
+    "AZURE_STORAGE_URI": "https://YOU_STORAGE_ACCOUNT.blob.core.windows.net",
+    "AZURE_STORAGE_CONTAINER": "NAME_OF_YOUR_CONTAINER",
+    "AZURE_STORAGE_SAS": "STORAGE_ACCOUNT_SAS_KEY",
     "OPENAI_API_TYPE": "azure",
-    "OPENAI_API_BASE": "https://oaipdems.openai.azure.com/",
+    "OPENAI_API_BASE": "https://YOUAOAI.openai.azure.com/",
     "OPENAI_API_VERSION": "2022-12-01",
-    "OPENAI_API_KEY": "a844fc4e6cb64fa6abbd8995bab51b83",
+    "OPENAI_API_KEY": "AOAI_KEY",
     "OPENAI_DEPLOYMENT_NAME": "da-vinci-3",
-    "OPENAI_EMBEDDED_DEPLOYMENT_NAME": "ada-emb",
+    "OPENAI_EMBEDDED_DEPLOYMENT_NAME": "YOUR_EMBEDDED_DEPLOYMENT_NAME",
     "OPENAI_EMBEDDED_CHUNK_SIZE": 1,
     "SAVE_INDEX": true,
-    "SEARCH_SERVICE_ENDPOINT": "https://searchpdedemo.search.windows.net",
-    "SEARCH_INDEX_NAME": "myindex",
-    "SEARCH_KEY": "rCZzuaaz99mlh4bTil0UsLS50GZSfTNZiVKDlEwSSKAzSeC9rUCq"
+    "SEARCH_SERVICE_ENDPOINT": "https://YOUR_SEARCH.search.windows.net",
+    "SEARCH_INDEX_NAME": "YOUR_INDEX",
+    "SEARCH_KEY": "YOUR_SEARCH_KEY"
   }
 }
