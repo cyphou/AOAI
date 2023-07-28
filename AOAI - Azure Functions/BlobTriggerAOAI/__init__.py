@@ -10,6 +10,7 @@ import docx2txt
 import logging
 import azure.functions as func 
 import pandas as pd
+import tempfile
 from azure.identity import DefaultAzureCredential
 
 from tqdm import tqdm 
@@ -230,8 +231,16 @@ def main(inputblob: func.InputStream):
         all_chunk_dicts = []
         
         #Store locally the file
-        doc = open(blobName, "wb")
-        doc.write(blob.download_blob().content_as_bytes())
+        tempdir = tempfile.gettempdir()
+
+        logging.info(f"Temp DIR {tempdir}")   
+        tempBlobName =  tempdir + '/' + blobName
+        tempChunks =  tempdir + '/' + blobWithoutExtension + '_chunks.json'
+        tempVectors = tempdir + '/' + blobWithoutExtension + '_docVectors.json'
+        # inputblob
+       
+        doc = open(tempBlobName, "wb")
+        doc.write(blob.download_blob().readall())
         doc.close()
 
         
@@ -239,7 +248,7 @@ def main(inputblob: func.InputStream):
        
         all_chunk_dicts = []
 
-        text, metadata = split_docx_with_tables_data(blobName, doc_file=None)
+        text, metadata = split_docx_with_tables_data(tempBlobName, doc_file=None)
         for idx, (chunk_text, chunk_metadata) in enumerate(zip(text, metadata)):
             chunk_dict = {
                 "text": chunk_text,
@@ -251,14 +260,18 @@ def main(inputblob: func.InputStream):
 
         logging.info("Building chunks dataframe")    
 
+
+
         df_chunks = pd.DataFrame(all_chunk_dicts)
 
         logging.info("Saving chunks dataframe")
         logging.info(df_chunks)
-        df_chunks.to_json(f"{blobWithoutExtension}_chunks.json", orient="records", lines=False, force_ascii=False)
+       
+        df_chunks.to_json(tempChunks, orient="records", lines=False, force_ascii=False)
         logging.info("Uploading chunks to datastore")
-        
-        with open(file=f"{blobWithoutExtension}_chunks.json", mode="rb") as data:
+      
+
+        with open(file=tempChunks, mode="rb") as data:
             blob_container.upload_blob(name =f"/tmp/{blobWithoutExtension}_chunks.json", data=data, overwrite=True)
             
         for item in tqdm(df_chunks):
@@ -271,14 +284,14 @@ def main(inputblob: func.InputStream):
             item['@search.action'] = 'upload'
 
         # Output embeddings to docVectors.json file
-        df_chunks.to_json(f"{blobWithoutExtension}_docVectors.json", orient="records", lines=False, force_ascii=False)
+        df_chunks.to_json(tempVectors, orient="records", lines=False, force_ascii=False)
         logging.info("Uploading Vectors to datastore")
 
-        with open(file=f"{blobWithoutExtension}_docVectors.json", mode="rb") as data:
+        with open(file=tempVectors, mode="rb") as data:
             blob_container.upload_blob(name =f"/tmp/{blobWithoutExtension}_docVectors.json", data=data, overwrite=True)
         
         # documents = json.load(data)
-        result = search_client.upload_documents(f"{blobWithoutExtension}_docVectors.json") 
+        result = search_client.upload_documents(tempVectors) 
         logging.info(f"Uploaded documents to search done") 
 
     else:
