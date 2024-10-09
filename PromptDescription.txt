@@ -1,0 +1,20 @@
+Can you give me a quick description(no more thant 15 words) to these tags below
+"
+AcGridVoltageV2
+WindTurbineCount
+AcGridVoltageV1
+ActiveStatusStatusValue
+TurbineFault
+TowerFault
+HssGearBearingGenSideTemperature
+BadGridConditions
+CircuitBreakerClosed
+HssGearBearingGenSideTemperature2
+GeneratorWindingL3Temperature
+HydraulicOilPressure
+ImsGearBearingRotSideTemperature
+GearboxOilInletTemperature
+GearboxOilInletPressure
+SysOpStateInt
+TowerOscillY1s
+"
